@@ -1,0 +1,22 @@
+{
+  "name": "jack-red",
+  "version": "1.0.0",
+  "description": "Bot in Telegram",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://chrisvrose@github.com/chrisvrose/jack-red.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chrisvrose/jack-red/issues"
+  },
+  "homepage": "https://github.com/chrisvrose/jack-red#readme",
+  "devDependencies": {
+    "eslint": "^5.15.1"
+  }
+}
