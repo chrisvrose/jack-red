@@ -18,5 +18,8 @@
   "homepage": "https://github.com/chrisvrose/jack-red#readme",
   "devDependencies": {
     "eslint": "^5.15.1"
+  },
+  "dependencies": {
+    "request": "^2.88.0"
   }
 }
