@@ -11,7 +11,7 @@ let parameters = JSON.parse(fs.readFileSync('default-parameters.json'))
 const base = `https://api.telegram.org/bot${token}/`
 console.log(`Token: ${token}`) 
 
-let updateOffset=-1
+//let updateOffset=-1
 let upDateOngoing=false
 
 
