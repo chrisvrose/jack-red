@@ -1,0 +1,8 @@
+{
+    "offset":822066345,
+    "limit":100,
+    "timeout":20,
+    "allowed_updates":[
+        "message","edited_message"
+    ]
+}
