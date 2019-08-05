@@ -2,7 +2,7 @@
 const request = require('request')
 const fs = require('fs')
 const path = require('path')
-
+const respond = require('./scripts/respond')
 
 const token = JSON.parse( fs.readFileSync('api-token.json')).token
 let parameters = JSON.parse(fs.readFileSync('default-parameters.json'))
@@ -23,11 +23,11 @@ setInterval(()=>{
                 "url":`${base}getUpdates`,"json":true,"body": parameters
             },
             (err,res,body)=>{
+
             // Checking response
             if(err){
                 throw err;
             }
-            //console.log(res.body+`${typeof(res.body)}`)
 
             let contents = res.body||{'ok':false}
             if(!contents.ok){
@@ -47,7 +47,7 @@ setInterval(()=>{
                         parameters.offset = e.update_id + 1
                     }
                     console.log(e.update_id)
-                    
+                    respond.call(e)
                 })
 
 
