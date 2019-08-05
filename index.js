@@ -36,7 +36,6 @@ setInterval(()=>{
             }
             // contents - Now work on response
             if(contents.result.length>0){
-                //console.log(`Update:${JSON.stringify(contents.result)}`)
                 // Ready to work on
                 if(parameters.offset===null){
                     parameters.offset = contents.result[0].update_id + 1
@@ -47,7 +46,7 @@ setInterval(()=>{
                         parameters.offset = e.update_id + 1
                     }
                     //console.log(e.update_id)
-                    respond.call(e)
+                    respond.call(base,e)
                 })
 
 
