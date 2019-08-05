@@ -1,10 +1,18 @@
 // Obtain a sendMessage Object
+const makeResponse = require('./makeResponse')
 
-module.exports = (updateObject)=>{
-    return {
-        "chat_id": updateObject.from.id,
-        "text":updateObject.text,
-        "reply_to_message_id": updateObject.message_id
+module.exports = (messageObject)=>{
+    if(makeResponse.canRespond(messageObject.text)){
+        console.log(makeResponse.getCommand(messageObject.text))
+        return {
+            "chat_id": messageObject.from.id,
+            "text": makeResponse.getPredicate(messageObject.text),
+            "parse_mode": "Markdown",
+            "reply_to_message_id": messageObject.message_id
+        }
+
     }
-    //return JSON.stringify(updateObject)
+    else{
+        return null
+    }
 }

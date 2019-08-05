@@ -7,13 +7,16 @@ module.exports.call = (base,updateObject)=>{
     if('message' in updateObject){
         let responseObject = process(updateObject.message)
         //console.log(process.process(updateObject.message))
-        request.post({
-            "url":`${base}sendMessage`,
-            "json":true,
-            "body":responseObject
-        },(err,res,body)=>{
-            if(err) console.log(err)
-            if(body.ok) console.log("Successfully sent")
-        })
+        if(responseObject)
+        {
+            request.post({
+                "url":`${base}sendMessage`,
+                "json":true,
+                "body":responseObject
+            },(err,res,body)=>{
+                if(err) console.log(err)
+                if(body.ok) console.log("Successfully sent")
+            })
+        }
     }
 }
