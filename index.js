@@ -2,7 +2,6 @@
 const request = require('request')
 const fs = require('fs')
 const path = require('path')
-//const
 
 
 const token = JSON.parse( fs.readFileSync('api-token.json')).token
@@ -11,7 +10,6 @@ let parameters = JSON.parse(fs.readFileSync('default-parameters.json'))
 const base = `https://api.telegram.org/bot${token}/`
 console.log(`Token: ${token}`) 
 
-//let updateOffset=-1
 let upDateOngoing=false
 
 
@@ -40,7 +38,14 @@ setInterval(()=>{
             if(contents.result.length>0){
                 console.log(`Update:${JSON.stringify(contents.result)}`)
                 // Ready to work on
+                if(parameters.offset===null){
+                    parameters.offset = contents[0].update_id + 1
+                }
                 contents.result.forEach(e=>{
+                    if(e.update_id + 1 > parameters.offset)
+                    {
+                        parameters.offset = e.update_id + 1
+                    }
                     console.log(e.update_id)
                     
                 })
@@ -48,7 +53,7 @@ setInterval(()=>{
 
             }
             else{
-                console.log("Empty contents")
+                console.log("Polling Timed out, empty.")
             }
 
             // Allow function to run in next interval since complete
