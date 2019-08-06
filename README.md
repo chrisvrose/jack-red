@@ -3,8 +3,9 @@
 Telegram bot for various things
 
 ToDO
--[X] Links
--[ ] ???
+
+- [X] Links
+- [ ] ???
 
 ## Current point of existence
 
