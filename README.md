@@ -2,7 +2,10 @@
 
 Telegram bot for various things
 
-ToDO
+`npm i`
+`npm test`
+
+## To Do
 
 - [X] Links
 - [ ] ???
