@@ -20,6 +20,7 @@
     "eslint": "^5.15.1"
   },
   "dependencies": {
+    "leetx": "0.0.3",
     "request": "^2.88.0"
   }
 }
