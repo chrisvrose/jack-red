@@ -6,7 +6,7 @@ module.exports = async (messageObject)=>{
         console.log(makeResponse.getCommand(messageObject.text))
         return {
             "chat_id": messageObject.from.id,
-            "text": await makeResponse.magnet( makeResponse.getPredicate(messageObject.text)),
+            "text": await makeResponse.makeResponse( messageObject.text ),
             "parse_mode": "Markdown",
             "reply_to_message_id": messageObject.message_id
         }
