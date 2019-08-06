@@ -23,11 +23,11 @@ exports.getPredicate = msg=>{
 
 let magnet = async searchterm=>{
     console.log(`Search for:${searchterm}`)
-    let result = await tsa.search(searchterm)
+    let result = await tsa.search(searchterm,'All',5)
     let resultString=''
-    for(let i=0;i<3;i++){
+    for(let i=0;i<3&&i<result.length;i++){
         let magnet = await tsa.getMagnet(result[i]) || ' '
-        resultString = resultString + `*${result[i].title.replace(/[\[\]]/g,'')}* - ${magnet}\n`
+        resultString = resultString + `${result[i].title.replace(/[\[\]]/g,'')} - \n${magnet}\n\n`
     }
     console.log(resultString)
     //console.log(await tsa.getMagnet(result[0]))

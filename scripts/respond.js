@@ -16,6 +16,7 @@ module.exports.call = async (base,updateObject)=>{
             },(err,res,body)=>{
                 if(err) console.log(err)
                 if(body.ok) console.log(`Successfully sent: ${body}`)
+                else console.log(responseObject)
             })
         }
     }
