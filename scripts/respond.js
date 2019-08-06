@@ -3,9 +3,9 @@
 const process = require('./process')
 const request = require('request')
 
-module.exports.call = (base,updateObject)=>{
+module.exports.call = async (base,updateObject)=>{
     if('message' in updateObject){
-        let responseObject = process(updateObject.message)
+        let responseObject = await process(updateObject.message)
         //console.log(process.process(updateObject.message))
         if(responseObject)
         {
@@ -15,7 +15,7 @@ module.exports.call = (base,updateObject)=>{
                 "body":responseObject
             },(err,res,body)=>{
                 if(err) console.log(err)
-                if(body.ok) console.log("Successfully sent")
+                if(body.ok) console.log(`Successfully sent: ${body.result[0].message.text}`)
             })
         }
     }
