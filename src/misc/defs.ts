@@ -4,7 +4,8 @@ export interface teleargs{
     name:string,
     token:string,
     requestURL:string,
-    lastUpdate:number
+    lastUpdate:number,
+    timeout:number
 }
 export interface envVars{
     token:string,

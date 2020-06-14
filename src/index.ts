@@ -28,16 +28,17 @@ async function loop(args:envVars) {
         throw new Error('Cannot get initial details: '+(e.msg||e.message||e.code||'General Error'));
     }
     const selfName = await getName(name);
-    console.info(`NAME:${selfName}`);
+    console.info(`Name: ${selfName}`);
 
     let lastUpdate = 0;
-
+    const timeout = 50;
     try {
         while (true) {
             //basically, check every second at max
             let x = delay(1000);
+            
             //while we await, we can do other stuff
-            lastUpdate = await main({name:selfName,token,requestURL,lastUpdate});
+            lastUpdate = await main({name:selfName,token,requestURL,lastUpdate,timeout});
             await x;
         }
     }catch(e){
@@ -57,10 +58,12 @@ async function main(args:teleargs) {
     const body = actions.body as unknown as getUpdateBody;
     assert(body.ok);
     assert(body.result instanceof Array);
+
+    //Do something
+    
     console.debug(body.result);
     
 
-    //assert(actions.body.ok);
     // const update_id = actions.body.
     // return the update number
     const getMaxMsgUpdateID:number = body.result.reduce((acc,curr)=>{
