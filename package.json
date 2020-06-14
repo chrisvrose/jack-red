@@ -5,9 +5,10 @@
   "main": "out/index.js",
   "scripts": {
     "test": "tsc && node out",
+    "build-ts":"tsc",
     "start":"node out",
     "dev": "tsc && node --inspect-brk out",
-    "postinstall": "tsc"
+    "postinstall": "npm run tsc"
   },
   "repository": {
     "type": "git",
