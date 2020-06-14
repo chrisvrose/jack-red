@@ -4,8 +4,9 @@
   "description": "Bot",
   "main": "out/index.js",
   "scripts": {
-    "start": "tsc && node out",
-    "test": "tsc && node --inspect-brk out",
+    "test": "tsc && node out",
+    "start":"node out",
+    "dev": "tsc && node --inspect-brk out",
     "postinstall": "tsc"
   },
   "repository": {
