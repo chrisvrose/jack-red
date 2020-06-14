@@ -11,6 +11,22 @@ export interface envVars{
 
 }
 
+
+export interface messageObj{
+
+}
+
+export interface getUpdateResultBody{
+    update_id:number,
+    message?:messageObj
+}
+export interface getUpdateBody{
+    ok:boolean,
+    result:getUpdateResultBody[]
+}
+
+
+
 export interface initBody{
     ok:boolean,
     result:{
