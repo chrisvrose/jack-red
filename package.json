@@ -8,7 +8,7 @@
     "build-ts":"tsc",
     "start":"node out",
     "dev": "tsc && node --inspect-brk out",
-    "postinstall": "npm run tsc"
+    "postinstall": "npm run build-ts"
   },
   "repository": {
     "type": "git",
