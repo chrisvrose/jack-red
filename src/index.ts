@@ -31,7 +31,7 @@ async function loop(args:envVars) {
     console.info(`Name: ${selfName}`);
 
     let lastUpdate = 0;
-    const timeout = 50;
+    const timeout = 100;
     try {
         while (true) {
             //basically, check every second at max
@@ -43,7 +43,7 @@ async function loop(args:envVars) {
         }
     }catch(e){
         console.error("E:",e.msg||e.message||'Error');
-        setTimeout(loop,5000);
+        setTimeout(loop,timeout*101);
     }
 }
 
