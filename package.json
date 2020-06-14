@@ -5,8 +5,8 @@
   "main": "out/index.js",
   "scripts": {
     "test": "tsc && node out",
-    "build-ts":"tsc",
-    "start":"node out",
+    "build-ts": "tsc",
+    "start": "node out",
     "dev": "tsc && node --inspect-brk out",
     "postinstall": "npm run build-ts"
   },
@@ -31,6 +31,7 @@
   },
   "dependencies": {
     "got": "^11.3.0",
+    "typescript": "^3.9.5",
     "yargs": "^15.3.1"
   }
 }
