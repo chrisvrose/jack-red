@@ -1,8 +1,0 @@
-{
-    "offset":null,
-    "limit":100,
-    "timeout":60,
-    "allowed_updates":[
-        "message","edited_message"
-    ]
-}

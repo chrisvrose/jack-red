@@ -1,26 +1,33 @@
 {
   "name": "jack-red",
-  "version": "1.0.0",
-  "description": "Bot in Telegram",
-  "main": "index.js",
+  "version": "0.1.0",
+  "description": "Bot",
+  "main": "out/index.js",
   "scripts": {
-    "test": "node index"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "tsc && node out"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://chrisvrose@github.com/chrisvrose/jack-red.git"
+    "url": "git+https://github.com/chrisvrose/jack-red.git"
   },
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "bot",
+    "ts"
+  ],
+  "author": "Atreya Bain",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/chrisvrose/jack-red/issues"
   },
   "homepage": "https://github.com/chrisvrose/jack-red#readme",
   "devDependencies": {
-    "eslint": "^5.15.1"
+    "@types/got": "^9.6.11",
+    "@types/node": "^14.0.13",
+    "@types/yargs": "^15.0.5"
   },
   "dependencies": {
-    "request": "^2.88.0",
-    "torrent-search-api": "^2.0.9"
+    "got": "^11.3.0",
+    "yargs": "^15.3.1"
   }
 }
