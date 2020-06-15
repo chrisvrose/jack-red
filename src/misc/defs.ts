@@ -12,9 +12,24 @@ export interface envVars{
 
 }
 
-
+export interface userObj{
+    id:number,
+    is_bot:boolean,
+    first_name:string,
+    last_name?:string,
+    username?:string
+}
 export interface messageObj{
-
+    message_id:number,
+    from?:userObj,//TODOF add user
+    date:number,
+    chat:any,//TODOF add Chat
+    audio?:any,
+    document?:any,
+    photo?:any,
+    sticker?:any,
+    caption?:string,
+    text?:string
 }
 
 export interface getUpdateResultBody{
@@ -26,17 +41,14 @@ export interface getUpdateBody{
     result:getUpdateResultBody[]
 }
 
-
+export interface sendMessage{
+    chat_id:number,
+    text:string,
+    disable_notification?:boolean,
+    reply_to_message_id?: number
+}
 
 export interface initBody{
     ok:boolean,
-    result:{
-        id:number,
-        is_bot:boolean,
-        first_name:string,
-        username:string,
-        can_join_groups:boolean,
-        can_read_all_group_messages:boolean,
-        supports_inline_queries: boolean
-    }
+    result:userObj
 }

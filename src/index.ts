@@ -2,6 +2,8 @@ import delay from './misc/delay'
 import {teleargs,envVars,getUpdateBody} from './misc/defs'
 import getName from './misc/getName'
 import {getMessage,getInit} from './tg/getWrapper';
+import { replyStrategy} from './tg/replyStrategy';
+import {sendWrapper} from './tg/sendWrapper'
 import { assert } from 'console';
 
 const token = process.env['JACK_TOKEN'] as string;
@@ -10,15 +12,15 @@ if(token===undefined){
 }
 
 if (require.main === module) {
-    
     loop({token}).catch(reason => {
-        console.error("E:", reason);
+        console.error('E:', reason);
     });
 }
 
-//Enable this to see cool viz
-// setInterval(()=>console.log("10secs"),10000);
-
+/**
+ * Main bot loop
+ * @param args Environment variables
+ */
 async function loop(args:envVars) {
     const requestURL = 'https://api.telegram.org/bot'+token;
     let name:string;
@@ -31,19 +33,41 @@ async function loop(args:envVars) {
     console.info(`Name: ${selfName}`);
 
     let lastUpdate = 0;
-    const timeout = 100;
+
+    //configurable parameters
+    const pollingInterval = 100;
+    const maxArraySize = 64;
+    const intervalTimerVal = 1000;
+
+    const sender = new sendWrapper(requestURL,intervalTimerVal/10,maxArraySize);
+    const requestArrays:Promise<boolean>[] = []; 
     try {
         while (true) {
             //basically, check every second at max
-            let x = delay(1000);
+            let x = delay(intervalTimerVal);
             
             //while we await, we can do other stuff
-            lastUpdate = await main({name:selfName,token,requestURL,lastUpdate,timeout});
+            const responses= await main({name:selfName,token,requestURL,lastUpdate,timeout: pollingInterval});
+            //update the last response number
+            lastUpdate = responses.maxMsgUpdateID;
+            //push it all in
+            await sender.pushAll(responses.sendables);
+            
+            requestArrays.push(sender.popMost());
+
+
+            //~~ makes it an integer
+            if(requestArrays.length>~~(maxArraySize/10)){
+                //ensure the request some time ago has completed.
+                //If it hasnt, it should stall everything
+                await requestArrays.shift();
+            }
+
             await x;
         }
     }catch(e){
-        console.error("E:",e.msg||e.message||'Error');
-        setTimeout(loop,timeout*101);
+        console.error('E:',e.msg||e.message||'Error');
+        setTimeout(loop,pollingInterval*101);
     }
 }
 
@@ -53,7 +77,7 @@ async function loop(args:envVars) {
  * @returns the last update we got
  */
 async function main(args:teleargs) {
-    console.debug("Logging Update for:",args.lastUpdate);
+    // console.debug("Logging Update for:",args.lastUpdate);
     const actions = await getMessage(args);
     const body = actions.body as unknown as getUpdateBody;
     assert(body.ok);
@@ -61,14 +85,15 @@ async function main(args:teleargs) {
 
     //Do something
     
-    console.debug(body.result);
+    // console.debug(body.result);
     
+    const sendables = await replyStrategy(body.result);
 
-    // const update_id = actions.body.
+    
     // return the update number
-    const getMaxMsgUpdateID:number = body.result.reduce((acc,curr)=>{
+    const maxMsgUpdateID:number = body.result.reduce((acc,curr)=>{
         return curr.update_id>acc?curr.update_id:acc;
     },args.lastUpdate);
-    return getMaxMsgUpdateID;
+    return {maxMsgUpdateID,sendables};
 }
 
