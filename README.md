@@ -8,6 +8,8 @@ Telegram bot deployed using Heroku.
 
 A test on async await, and typescript. Since this project is IO-bound(mostly), it makes sense to use Node and Typescript.
 
+Special thanks to: [`twss`](https://github.com/DanielRapp/twss.js)
+
 ## Usage
 
 *You don't*
